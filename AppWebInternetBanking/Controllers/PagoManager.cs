@@ -19,6 +19,7 @@ namespace AppWebInternetBanking.Controllers
             HttpClient httpClient = new HttpClient();
 
             httpClient.DefaultRequestHeaders.Add("Authorization", token);
+
             httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
 
             return httpClient;
