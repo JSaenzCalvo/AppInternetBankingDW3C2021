@@ -61,7 +61,7 @@ namespace AppWebInternetBanking.Views
 
                 if (!string.IsNullOrEmpty(creditoIngresado.CodigoMoneda.ToString()))
                 {
-                    lblResultado.Text = "Servicio ingresado con exito";
+                    lblResultado.Text = "Credito ingresado con exito";
                     lblResultado.Visible = true;
                     lblResultado.ForeColor = Color.Green;
                     btnAceptarMant.Visible = false;
@@ -96,11 +96,15 @@ namespace AppWebInternetBanking.Views
 
                 if (!string.IsNullOrEmpty(creditoActualizado.CodigoMoneda.ToString()))
                 {
-                    lblResultado.Text = "credito actualizado con exito";
+                    lblResultado.Text = "Credito actualizado con exito";
                     lblResultado.Visible = true;
                     lblResultado.ForeColor = Color.Green;
                     btnAceptarMant.Visible = false;
                     InicializarControles();
+
+                    Correo correo = new Correo();
+                    correo.Enviar("Credito actualizado con exito", creditoActualizado.Descripcion, "svillagra07@gmail.com",
+                        Convert.ToInt32(Session["CodigoUsuario"].ToString()));
 
                     ScriptManager.RegisterStartupScript(this,
                 this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
@@ -127,7 +131,7 @@ namespace AppWebInternetBanking.Views
                 Credito credito = await creditoManager.Eliminar(_codigo, Session["Token"].ToString());
                 if (!string.IsNullOrEmpty(credito.Descripcion))
                 {
-                    ltrModalMensaje.Text = "credito eliminado";
+                    ltrModalMensaje.Text = "Credito eliminado";
                     btnAceptarModal.Visible = false;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { openModal(); });", true);
                     InicializarControles();
@@ -158,7 +162,7 @@ namespace AppWebInternetBanking.Views
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
-            ltrTituloMantenimiento.Text = "Nuevo servicio";
+            ltrTituloMantenimiento.Text = "Nuevo Credito";
             btnAceptarMant.ControlStyle.CssClass = "btn btn-success";
             btnAceptarMant.Visible = true;
             ltrCodigoMant.Visible = true;

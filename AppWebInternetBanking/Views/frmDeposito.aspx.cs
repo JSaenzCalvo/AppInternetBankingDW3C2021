@@ -37,7 +37,7 @@ namespace AppWebInternetBanking.Views
             }
             catch (Exception e)
             {
-                lblStatus.Text = "Hubo un error al cargar la lista de depositos" +  e.ToString() ;
+                lblStatus.Text = "Hubo un error al cargar la lista de depositos";
                 lblStatus.Visible = true;
             }
         }
@@ -58,7 +58,7 @@ namespace AppWebInternetBanking.Views
 
                 Deposito depositoIngresado = await depositoManager.Ingresar(deposito, Session["Token"].ToString());
 
-                if (!string.IsNullOrEmpty(depositoIngresado.CodigoUsuario.ToString()))
+                if (!string.IsNullOrEmpty(depositoIngresado.CodigoMoneda.ToString()))
                 {
                     lblResultado.Text = "Deposito ingresado con exito";
                     lblResultado.Visible = true;
@@ -91,7 +91,7 @@ namespace AppWebInternetBanking.Views
 
                 Deposito depositoActualizado = await depositoManager.Actualizar(deposito, Session["Token"].ToString());
 
-                if (!string.IsNullOrEmpty(depositoActualizado.CodigoUsuario.ToString()))
+                if (!string.IsNullOrEmpty(depositoActualizado.CodigoMoneda.ToString()))
                 {
                     lblResultado.Text = "Deposito actualizado con exito";
                     lblResultado.Visible = true;
@@ -122,9 +122,9 @@ namespace AppWebInternetBanking.Views
             {
 
                 Deposito deposito = await depositoManager.Eliminar(_codigo, Session["Token"].ToString());
-                if (!string.IsNullOrEmpty(deposito.CodigoUsuario.ToString()))
+                if (!string.IsNullOrEmpty(deposito.CodigoMoneda.ToString()))
                 {
-                    ltrModalMensaje.Text = "Servicio eliminado";
+                    ltrModalMensaje.Text = "Deposito eliminado";
                     btnAceptarModal.Visible = false;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { openModal(); });", true);
                     InicializarControles();
@@ -138,7 +138,7 @@ namespace AppWebInternetBanking.Views
                     CodigoUsuario =
                     Convert.ToInt32(Session["CodigoUsuario"].ToString()),
                     FechaHora = DateTime.Now,
-                    Vista = "frmServicio.aspx",
+                    Vista = "frmDeposito.aspx",
                     Accion = "btnAceptarModal_Click",
                     Fuente = ex.Source,
                     Numero = ex.HResult,
@@ -189,7 +189,7 @@ namespace AppWebInternetBanking.Views
             switch (e.CommandName)
             {
                 case "Modificar":
-                    ltrTituloMantenimiento.Text = "Modificar servicio";
+                    ltrTituloMantenimiento.Text = "Modificar Deposito";
                     btnAceptarMant.ControlStyle.CssClass = "btn btn-primary";
                     txtCodigoMant.Text = row.Cells[0].Text.Trim();
                     txtCodigoUsuario.Text = row.Cells[1].Text.Trim();

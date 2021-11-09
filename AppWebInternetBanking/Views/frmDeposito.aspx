@@ -36,7 +36,7 @@
     <asp:GridView ID="gvDepositos" runat="server" AutoGenerateColumns="false"
       CssClass="table table-sm" HeaderStyle-CssClass="thead-dark" 
         HeaderStyle-BackColor="#243054" HeaderStyle-ForeColor="White" 
-        AlternatingRowStyle-BackColor="LightBlue" >
+        AlternatingRowStyle-BackColor="LightBlue" OnRowCommand="gvDepositos_RowCommand">
         <Columns>
             <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
             <asp:BoundField HeaderText="CodigoUsuario" DataField="CodigoUsuario" />
